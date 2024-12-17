@@ -1,7 +1,16 @@
 'use client'
 
 import { useEditor, EditorContent } from '@tiptap/react'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
+import Image from '@tiptap/extension-image'
 import StarterKit from '@tiptap/starter-kit'
+import ImageResize from 'tiptap-extension-resize-image'
+
 
 export const Editor = () => {
     const editor = useEditor({
@@ -12,8 +21,30 @@ export const Editor = () => {
 
             }
         },
-        extensions: [StarterKit],
-        content: '<p>Hello World! 🌎️</p>',
+        extensions: [StarterKit,
+            TaskList,
+            TaskItem.configure({nested: true,}),
+            Table,
+            TableCell,
+            TableHeader,
+            TableRow,
+            Image,
+            ImageResize
+        ],
+        content: '   <table>\n' +
+            '          <tbody>\n' +
+            '            <tr>\n' +
+            '              <th>Name</th>\n' +
+            '              <th colspan="3">Description</th>\n' +
+            '            </tr>\n' +
+            '            <tr>\n' +
+            '              <td>Cyndi Lauper</td>\n' +
+            '              <td>Singer</td>\n' +
+            '              <td>Songwriter</td>\n' +
+            '              <td>Actress</td>\n' +
+            '            </tr>\n' +
+            '          </tbody>\n' +
+            '        </table>',
     })
 
     return <div className={'siz-full overflow-x-auto gb-[#f9fbfd] px-4 print:p-0 print:bg-white print:overflow-visible'}>
